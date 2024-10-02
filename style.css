@@ -1,0 +1,321 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: #1a1a2e;
+    color: #fff;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* 3D moving background */
+.background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    overflow: hidden;
+}
+
+.cube {
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    background: rgba(255, 255, 255, 0.1);
+    animation: cube 15s linear infinite;
+    transform-style: preserve-3d;
+}
+
+.cube:nth-child(1) {
+    top: 10%;
+    left: 45%;
+    animation-delay: 0s;
+}
+
+.cube:nth-child(2) {
+    top: 70%;
+    left: 25%;
+    animation-delay: -2s;
+}
+
+.cube:nth-child(3) {
+    top: 40%;
+    left: 75%;
+    animation-delay: -4s;
+}
+
+.cube:nth-child(4) {
+    top: 80%;
+    left: 90%;
+    animation-delay: -6s;
+}
+
+.cube:nth-child(5) {
+    top: 50%;
+    left: 10%;
+    animation-delay: -8s;
+}
+
+@keyframes cube {
+    0% {
+        transform: scale(0) rotate(0deg) translate(-50%, -50%);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(20) rotate(960deg) translate(-50%, -50%);
+        opacity: 0;
+    }
+}
+
+.spiral {
+    position: absolute;
+    width: 100px;  /* Reduced from 200px */
+    height: 100px; /* Reduced from 200px */
+    border: 2px solid rgba(255, 255, 255, 0.7);
+    border-radius: 50%;
+    animation: spiral 20s linear infinite;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5),
+                inset 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+.spiral:nth-child(6) {
+    top: 20%;
+    left: 20%;
+    animation-duration: 15s;
+}
+
+.spiral:nth-child(7) {
+    top: 60%;
+    left: 80%;
+    animation-duration: 25s;
+    animation-direction: reverse;
+}
+
+.spiral:nth-child(8) {
+    top: 40%;
+    left: 60%;
+    animation-duration: 20s;
+    animation-direction: alternate;
+}
+
+@keyframes spiral {
+    0% {
+        transform: rotate(0deg) scale(1) translateX(0);
+    }
+    50% {
+        transform: rotate(360deg) scale(1.5) translateX(50px); /* Reduced from 100px */
+    }
+    100% {
+        transform: rotate(720deg) scale(1) translateX(0);
+    }
+}
+
+@keyframes titleAppear {
+    0% {
+        opacity: 0;
+        transform: translateY(-20px);
+        filter: blur(10px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+        filter: blur(0);
+    }
+}
+
+.album-title {
+    position: fixed;
+    top: 0;
+    left: 25px;
+    font-size: 25px;
+    font-weight: 700;
+    color: #fff;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    z-index: 1000;
+    margin-top: 10px;
+    padding-top: 5px;
+    font-family: 'Pacifico', cursive;
+    letter-spacing: 0px;
+    text-transform: capitalize;
+    animation: titleAppear 1.5s ease-out forwards;
+}
+
+.album-container {
+    position: relative;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    background: rgba(26, 26, 46, 0.8);
+    border-radius: 20px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+}
+
+.image-scroll {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;  /* Firefox */
+    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+}
+
+.image-scroll::-webkit-scrollbar { 
+    display: none;  /* WebKit */
+}
+
+.image-group {
+    flex: 0 0 auto;
+    width: 100%;
+    scroll-snap-align: start;
+    padding: 0 20px;
+}
+
+.main-image {
+    perspective: 1000px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.main-image img {
+    max-width: 100%;
+    max-height: 50vh;
+    border-radius: 15px;
+    transition: transform 0.6s ease, box-shadow 0.6s ease;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+    transform: rotateY(0deg) rotateX(0deg);
+    object-fit: cover;
+}
+
+.main-image img:hover {
+    transform: rotateY(15deg) rotateX(10deg);
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+}
+
+.small-images {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.small-image {
+    perspective: 1000px;
+    width: 30%;
+    max-width: 300px;
+}
+
+.small-image img {
+    width: 100%;
+    height: 25vh;
+    border-radius: 15px;
+    transition: transform 0.6s ease, box-shadow 0.6s ease;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    object-fit: cover;
+}
+
+.small-image img:hover {
+    transform: rotateY(-10deg) rotateX(5deg);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+}
+
+.image-3d.enlarged {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
+    max-width: 90vw;
+    max-height: 90vh;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+}
+
+.nav-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.2);
+    color: #fff;
+    border: none;
+    padding: 15px 20px;
+    font-size: 24px;
+    cursor: pointer;
+    z-index: 10;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.nav-btn:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: translateY(-52%);
+    box-shadow: 0 7px 20px rgba(0, 0, 0, 0.4);
+}
+
+#prevBtn {
+    left: 20px;
+}
+
+#nextBtn {
+    right: 20px;
+}
+
+.progress-indicator {
+    position: fixed;
+    bottom: 20px;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+    z-index: 100;
+}
+
+.progress-bubble {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.3);
+    margin: 0 5px;
+    transition: background-color 0.3s ease;
+}
+
+.progress-bubble.active {
+    background-color: #fff;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* 3D Heading */
+.album-title span {
+    display: inline-block;
+    animation: rotate-3d 5s linear infinite;
+    transform-style: preserve-3d;
+}
+
+@keyframes rotate-3d {
+    0% {
+        transform: rotateY(0deg);
+    }
+    100% {
+        transform: rotateY(360deg);
+    }
+}
