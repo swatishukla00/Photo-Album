@@ -13,3 +13,5 @@
 - Pagination to navigate through multiple pages of images.
 - Hover images for 3D transformations and box-shadow effects.
 - Clean and modern CSS layout.
+## If you want to use PHP's built-in development server to run your PHP files through a web browser, you can do:
+Bash : php -S localhost:8000
